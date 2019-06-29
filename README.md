@@ -14,4 +14,4 @@ First, clone this repository
 
 Second, run `rcnt` ;)
 
-`python rcnt [video_file_path]`
+`python3 rcnt [video_file_path]`
