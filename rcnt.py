@@ -8,9 +8,16 @@
 # This source code is licensed under the BSD-style license found in the
 # LICENSE file in the root directory of this source tree.
 
-import cv2
-import numpy
-import sys
+import cv2, sys, os
+
+def store_results(file_name, rotations, time, revs, b_avg):
+    if(file_name.find('/')):
+        file_name = file_name[file_name.rfind('/') +1 :] + str(".txt")
+    if (os.path.exists(file_name)):
+        os.remove(file_name)
+    results_file = open(file_name, "+a")
+    results_file.write("Rotations: " + str(rotations) + "\nTime: " + str(time) + "\nRevolutions per second: " + str(revs) + "\nAverage brightness: " + str(b_avg))
+    results_file.close()
 
 def main():
     if(len(sys.argv) != 2):
@@ -32,7 +39,7 @@ def main():
         except:
             break
     average = sum(brightness)/frame_count
-    print("Average brihtness: " + str(average))
+    print("Average brightness: " + str(average))
     enter = False
     out = True
     peaks =0
@@ -44,8 +51,9 @@ def main():
             peaks += 1
             enter = False
             out = True
-    print(peaks)
-
+    print("Rotations detected: " + str(peaks))
+    duration = video_feed.get(cv2.CAP_PROP_FRAME_COUNT) / video_feed.get(cv2.CAP_PROP_FPS)
+    store_results(sys.argv[1], peaks, duration, peaks/duration, average)
     video_feed.release()
     cv2.destroyAllWindows()
 if __name__ == '__main__':
