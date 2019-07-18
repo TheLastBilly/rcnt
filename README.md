@@ -1,5 +1,5 @@
 # rcnt
-`rcnt` is a small python utility that counts the rotations of a rocket based on a video file shooted from a camara located on it's side during launch. Currently `rcnt` works by calculating the overall "brightness" of the video, so it works best when the rocket is launched during the day.
+`rcnt` is a python utility that counts the rotations of a rocket based on a video file shooted from a camara located on it's side during launch. Currently `rcnt` works by calculating the overall "brightness" of the video, so it works best when the rocket is launched during the day.
 
 ## Requierements
 * Git
